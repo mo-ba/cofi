@@ -16,39 +16,35 @@ class ArrayFilterTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilter()
     {
-        $filter = Filter::isInt();
 
         $data = [2, '43', 0, false, null, [], '', ['0']];
 
         $expected = [2, 0];
 
-        $this->assertEquals($expected, array_values(array_filter($data, $filter)));
+        $this->assertEquals($expected, array_values(array_filter($data, Filter::isInt())));
     }
 
     public function testFilterNot()
     {
-        $filter = Filter::isInt()->invert();
-
         $data = [2, '43', 0, false, null, [], '', ['0']];
-
         $expected = ['43', false, null, [], '', ['0']];
-
-        $this->assertEquals($expected, array_values(array_filter($data, $filter)));
+        $this->assertEquals($expected, array_values(array_filter($data, Filter::isInt()->invert())));
     }
 
     public function testFilter2()
     {
-        $filter = Filter::_or(
-            FilterFunction::isInt(),
-            Filter::_and(
-                Filter::isArray(),
-                Filter::isEmpty()->invert()
-            )
-        );
+        $filter =
+            Filter::_or(
+                FilterFunction::isInt(),
+                Filter::_and(
+                    Filter::isArray(),
+                    Filter::isEmpty()->invert()
+                )
+            );
 
         $data = [2, '43', 0, false, null, [], '', ['0']];
 
-        $expected = [2, 0,['0']];
+        $expected = [2, 0, ['0']];
 
         $this->assertEquals($expected, array_values(array_filter($data, $filter)));
     }
