@@ -25,7 +25,7 @@ class FilterCompoundTest extends \PHPUnit_Framework_TestCase
 
     public function testNand()
     {
-        $filter = Filter::_and(Filter::isArray(), Filter::isEmpty())->invert();
+        $filter = Filter::_and(Filter::isArray(), Filter::isEmpty())->not();
 
 
         $this->assertNotFalse($filter(['324']));
@@ -67,7 +67,7 @@ class FilterCompoundTest extends \PHPUnit_Framework_TestCase
             function ($e) {
                 return $e === 'aaab';
             }
-        )->invert();
+        )->not();
 
 
         $this->assertNotTrue($filter(['324']));

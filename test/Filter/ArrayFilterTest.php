@@ -28,7 +28,8 @@ class ArrayFilterTest extends \PHPUnit_Framework_TestCase
     {
         $data = [2, '43', 0, false, null, [], '', ['0']];
         $expected = ['43', false, null, [], '', ['0']];
-        $this->assertEquals($expected, array_values(array_filter($data, Filter::isInt()->invert())));
+        $this->assertEquals($expected, array_values(array_filter($data, Filter::isInt()->not())));
+
     }
 
     public function testFilter2()
@@ -38,7 +39,7 @@ class ArrayFilterTest extends \PHPUnit_Framework_TestCase
                 FilterFunction::isInt(),
                 Filter::_and(
                     Filter::isArray(),
-                    Filter::isEmpty()->invert()
+                    Filter::isEmpty()->not()
                 )
             );
 

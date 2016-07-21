@@ -26,7 +26,7 @@ class InvertedFilter extends AbstractFilter
         $this->inner = $inner;
     }
 
-    public function invert()
+    public function not()
     {
         return $this->inner;
     }

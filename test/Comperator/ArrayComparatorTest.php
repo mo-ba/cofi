@@ -283,6 +283,35 @@ class ArrayComparatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $data);
 
     }
+    /**
+     *
+     */
+    public function testSortMultiple7()
+    {
+        $data = [
+            ['a' => 1, 'b' => 7, 'c' => 3,  3],
+            ['a' => 2, 'b' => 2, 'c' => 2,  6],
+            ['a' => 2, 'b' => 2, 'c' => 7,  2],
+            ['a' => 2, 'b' => 8, 'c' => 3,  7],
+            ['a' => 2, 'b' => 2, 'c' => 2,  2],
+            ['a' => 1, 'b' => 2, 'c' => 8,  2],
+            ['a' => 2, 'b' => 2, 'c' => 2,  5],
+            ['a' => 2, 'b' => 2, 'c' => 2,  9],
+        ];
+        $expected = [
+            ['a' => 1, 'b' => 2, 'c' => 8,  2],
+            ['a' => 1, 'b' => 7, 'c' => 3,  3],
+            ['a' => 2, 'b' => 2, 'c' => 2,  2],
+            ['a' => 2, 'b' => 2, 'c' => 2,  5],
+            ['a' => 2, 'b' => 2, 'c' => 2,  6],
+            ['a' => 2, 'b' => 2, 'c' => 2,  9],
+            ['a' => 2, 'b' => 2, 'c' => 7,  2],
+            ['a' => 2, 'b' => 8, 'c' => 3,  7],
+        ];
+        usort($data, ArrayComparator::init(['a', 'b', 'c', 0]));
+        $this->assertEquals($expected, $data);
+
+    }
 
 
 }

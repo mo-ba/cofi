@@ -7,7 +7,7 @@ use Cofi\Filter\InvertedFilter;
 abstract class AbstractFilter implements FilterInterface
 {
 
-    public function invert()
+    public function not()
     {
         return new InvertedFilter($this);
     }

@@ -96,7 +96,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
     public function testIsStringNotNot()
     {
-        $f = Filter::isString()->invert()->invert();
+        $f = Filter::isString()->not()->not();
         $this->assertFalse($f(2));
         $this->assertTrue($f("2"));
         $this->assertFalse($f(2.8));
@@ -116,7 +116,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     }
     public function testIsStringNot()
     {
-        $f = Filter::isString()->invert();
+        $f = Filter::isString()->not();
         $this->assertNotFalse($f(2));
         $this->assertNotTrue($f("2"));
         $this->assertNotFalse($f(2.8));
