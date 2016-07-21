@@ -1,7 +1,7 @@
 {
   "name": "sysvyz/cofi",
   "type": "library",
-  "description": "Comparators & Filters for PHP PHP 5.4",
+  "description": "Comparators & Filters for PHP 5.4",
   "keywords": ["filter", "comparator"],
   "homepage": "https://github.com/mo-ba/cofi",
   "license": "MIT",
