@@ -1,41 +1,36 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mb
- * Date: 20.07.16
- * Time: 21:56
- */
-
-namespace Cofi\Filter;
-
+<?php namespace Cofi\Filter;
 
 use Cofi\Filter\Abstracts\AbstractFilter;
 
+/**
+ * Class InvertedFilter
+ * @package Cofi\Filter
+ */
 class InvertedFilter extends AbstractFilter
 {
 
 
-    private $inner;
+	private $inner;
 
-    /**
-     * InvertedComparor constructor.
-     * @param AbstractFilter $inner
-     */
-    public function __construct($inner)
-    {
-        $this->inner = $inner;
-    }
+	/**
+	 * InvertedComparor constructor.
+	 * @param AbstractFilter $inner
+	 */
+	public function __construct($inner)
+	{
+		$this->inner = $inner;
+	}
 
-    public function not()
-    {
-        return $this->inner;
-    }
+	public function not()
+	{
+		return $this->inner;
+	}
 
 
-    public function apply($value)
-    {
-        return !$this->inner->apply($value);
-    }
+	public function apply($value)
+	{
+		return !$this->inner->apply($value);
+	}
 
 
 }

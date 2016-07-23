@@ -1,38 +1,33 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mb
- * Date: 20.07.16
- * Time: 22:25
- */
-
-namespace Cofi\Filter;
-
+<?php namespace Cofi\Filter;
 
 use Cofi\Filter\Abstracts\AbstractFilter;
 
+/**
+ * Class AndFilter
+ * @package Cofi\Filter
+ */
 class AndFilter extends AbstractFilter
 {
 
-    private $filters = [];
+	private $filters = [];
 
-    /**
-     * AndFilter constructor.
-     * @param array $filters
-     */
-    public function __construct(array $filters)
-    {
-        $this->filters = $filters;
-    }
+	/**
+	 * AndFilter constructor.
+	 * @param array $filters
+	 */
+	public function __construct(array $filters)
+	{
+		$this->filters = $filters;
+	}
 
 
-    public function apply($value)
-    {
-        foreach ($this->filters as $filter) {
-            if (!$filter($value)) {
-                return false;
-            }
-        }
-        return true;
-    }
+	public function apply($value)
+	{
+		foreach ($this->filters as $filter) {
+			if (!$filter($value)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
