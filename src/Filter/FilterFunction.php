@@ -1,4 +1,4 @@
-<?php namespace Cofi\Filter\Abstracts;
+<?php namespace Cofi\Filter;
 
 use Cofi\Comparator\Interfaces\ComparatorInterface;
 
@@ -10,6 +10,7 @@ final class FilterFunction
 {
 	/**
 	 * ComparatorFunction constructor.
+	 * @codeCoverageIgnore
 	 */
 	final private function __construct()
 	{
@@ -73,7 +74,7 @@ final class FilterFunction
 	public static function isSame($expect)
 	{
 		return function ($value) use ($expect) {
-			return $value == $expect;
+			return $value === $expect;
 		};
 	}
 
@@ -86,6 +87,15 @@ final class FilterFunction
 			return $value == $expect;
 		};
 	}
+	public static function isNotEqual($expect, $comparator = null)
+	{
+		return function ($value) use ($expect, $comparator) {
+			if ($comparator instanceof ComparatorInterface) {
+				return $comparator->compare($value, $expect) != 0;
+			}
+			return $value != $expect;
+		};
+	}
 
 	public static function isGreaterThen($expect, $comparator = null)
 	{
@@ -93,17 +103,38 @@ final class FilterFunction
 			if ($comparator instanceof ComparatorInterface) {
 				return $comparator->compare($value, $expect) > 0;
 			}
-			return $value > $expect;
+
+			return +$value > +$expect;
+		};
+	}
+	public static function isLessThen($expect, $comparator = null)
+	{
+		return function ($value) use ($expect, $comparator) {
+			if ($comparator instanceof ComparatorInterface) {
+				return $comparator->compare($value, $expect) < 0;
+			}
+			return +$value < +$expect;
 		};
 	}
 
 	public static function isGreaterThenOrEquals($expect, $comparator = null)
 	{
+
+
 		return function ($value) use ($expect, $comparator) {
 			if ($comparator instanceof ComparatorInterface) {
 				return $comparator->compare($value, $expect) >= 0;
 			}
-			return $value >= $expect;
+			return +$value >= +$expect;
+		};
+	}
+	public static function isLessThenOrEquals($expect, $comparator = null)
+	{
+		return function ($value) use ($expect, $comparator) {
+			if ($comparator instanceof ComparatorInterface) {
+				return $comparator->compare($value, $expect) <= 0;
+			}
+			return +$value <= +$expect;
 		};
 	}
 

@@ -307,10 +307,127 @@ class ArrayComparatorTest extends PHPUnit_Framework_TestCase
 			['a' => 2, 'b' => 2, 'c' => 7, 2],
 			['a' => 2, 'b' => 8, 'c' => 3, 7],
 		];
-		usort($data, ArrayComparator::init(['a', 'b', 'c', 0]));
+		usort($data, ArrayComparator::init(['a', 'b', 'c' => new CComparator(), 0]));
+		$this->assertEquals($expected, $data);
+
+	}
+	/**
+	 * @expectedException \Cofi\Exceptions\InvalidComparatorArgumentException
+	 * @expectedExceptionCode 3
+	 */
+	public function testSortMultiple8()
+	{
+		$data = [
+			['a' => 1, 'b' => 7, 'c' => 3, 3],
+			['a' => 2, 'b' => 2, 'c' => 2, 6],
+			['a' => 2, 'b' => 2, 'c' => 7, 2],
+			['a' => 2, 'b' => 8, 'c' => 3, 7],
+			['a' => 2, 'b' => 2, 'c' => 2, 2],
+			['a' => 1, 'b' => 2, 'c' => 8, 2],
+			['a' => 2, 'b' => 2, 'c' => 2, 5],
+			['a' => 2, 'b' => 2, 'c' => 2, 9],
+		];
+		$expected = [
+			['a' => 1, 'b' => 2, 'c' => 8, 2],
+			['a' => 1, 'b' => 7, 'c' => 3, 3],
+			['a' => 2, 'b' => 2, 'c' => 2, 2],
+			['a' => 2, 'b' => 2, 'c' => 2, 5],
+			['a' => 2, 'b' => 2, 'c' => 2, 6],
+			['a' => 2, 'b' => 2, 'c' => 2, 9],
+			['a' => 2, 'b' => 2, 'c' => 7, 2],
+			['a' => 2, 'b' => 8, 'c' => 3, 7],
+		];
+
+
+		usort($data, ArrayComparator::init(['a', 'b' => true , 'c' => new CComparator(), 0]));
+		$this->assertEquals($expected, $data);
+
+	}
+
+	/**
+	 *
+	 */
+	public function testSortMultiple9()
+	{
+		$data = [
+			['a' => 1, 'b' => 'aaaah'],
+			['a' => 2, 'b' => 'hjhg'],
+			['a' => 1, 'b' => 'aaaaa'],
+			['a' => 1, 'b' => 'aaaab'],
+		];
+		$expected = [
+			['a' => 1, 'b' => 'aaaaa'],
+			['a' => 1, 'b' => 'aaaab'],
+			['a' => 1, 'b' => 'aaaah'],
+			['a' => 2, 'b' => 'hjhg'],
+		];
+
+
+		usort($data, ArrayComparator::init(['a', 'b']));
+		$this->assertEquals($expected, $data);
+	}
+	/**
+	 * @expectedException \Cofi\Exceptions\InvalidComparatorArgumentException
+	 * @expectedExceptionCode 5
+	 */
+	public function testSortMultiple10()
+	{
+		$data = [
+			['a' => 1, 'b' => 'aaaah'],
+			['a' => 2, 'b' => 'hjhg'],
+			['a' => 1, 'b' => 'aaaaa'],
+			['a' => 1, 'b' => 5],
+		];
+		$expected = [
+			['a' => 1, 'b' => 'aaaaa'],
+			['a' => 1, 'b' => 'aaaab'],
+			['a' => 1, 'b' => 'aaaah'],
+			['a' => 2, 'b' => 'hjhg'],
+		];
+
+
+		usort($data, ArrayComparator::init(['a', 'b']));
+		$this->assertEquals($expected, $data);
+
+	}
+	/**
+	 * @expectedException \Cofi\Exceptions\InvalidComparatorArgumentException
+	 * @expectedExceptionCode 4
+	 */
+	public function testSortMultiple11()
+	{
+		$data = [
+			['a' => 1, 'b' => 'aaaah'],
+			['a' => 2, 'b' => 'hjhg'],
+			['a' => 1, 'b' => 'aaaaa'],
+			['a' => 1],
+		];
+		$expected = [
+			['a' => 1, 'b' => 'aaaaa'],
+			['a' => 1, 'b' => 'aaaab'],
+			['a' => 1, 'b' => 'aaaah'],
+			['a' => 2, 'b' => 'hjhg'],
+		];
+
+
+		usort($data, ArrayComparator::init(['a', 'b']));
 		$this->assertEquals($expected, $data);
 
 	}
 
 
+}
+
+class CComparator implements Comparator\Interfaces\ComparatorInterface
+{
+
+	/**
+	 * @param $a
+	 * @param $b
+	 * @return int
+	 */
+	public function compare($a, $b)
+	{
+		return $a - $b;
+	}
 }

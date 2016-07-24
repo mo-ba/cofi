@@ -7,7 +7,7 @@ use Cofi\Filter\InvertedFilter;
  * Class AbstractFilter
  * @package Cofi\Filter\Abstracts
  */
-abstract class AbstractFilter implements FilterInterface
+abstract class Filter implements FilterInterface
 {
 
 	public function not()

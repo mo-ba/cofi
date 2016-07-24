@@ -13,6 +13,7 @@ final class Comparator
 {
 	/**
 	 * Comparator constructor.
+	 * @codeCoverageIgnore
 	 */
 	final private function __construct()
 	{

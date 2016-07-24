@@ -2,6 +2,7 @@
 
 use Cofi\Comparator\ComparatorFunction;
 use Cofi\Comparator\Interfaces\ComparatorInterface;
+use Cofi\Exceptions\InvalidComparatorArgumentException;
 
 /**
  * Class AbstractContainerComparator
@@ -34,6 +35,7 @@ abstract class AbstractContainerComparator extends AbstractComparator
 	 * @param $a
 	 * @param $b
 	 * @return int
+	 * @throws InvalidComparatorArgumentException
 	 */
 	public function compare($a, $b)
 	{
@@ -50,16 +52,16 @@ abstract class AbstractContainerComparator extends AbstractComparator
 					} else if (strtolower($comparator) == 'asc') {
 						$cmp = $this->_cmpAsc($a, $b, $key);
 					} else {
-						die('error1 -> asc|desc|callable|comparator');
+						throw new InvalidComparatorArgumentException('asc|desc|callable|comparator', 1);
 					}
 				} else if ($comparator instanceof ComparatorInterface) {
 					$cmp = $comparator->compare($this->_get($a, $key), $this->_get($b, $key));
 				} else {
-					die('error3 comparator type not supported');
+					throw new InvalidComparatorArgumentException('comparator type not supported', 3);
 				}
-			} else {
-				die('error2 key must be string or integer');
-			}
+			} /*else {
+				throw new InvalidComparatorArgumentException('key must be string or integer', 2);
+			}*/
 			if ($cmp != 0) {
 				break;
 			}
@@ -72,23 +74,28 @@ abstract class AbstractContainerComparator extends AbstractComparator
 	 * @param $b
 	 * @param $field
 	 * @return int
+	 * @throws InvalidComparatorArgumentException
 	 */
 	public function _cmpAsc($a, $b, $field)
 	{
 		$issetA = $this->_isset($a, $field);
 		$issetB = $this->_isset($b, $field);
-		$valA = $this->_get($a, $field);
-		$valB = $this->_get($b, $field);
-		if ($issetA && is_numeric($valA) && $issetB && is_numeric($valB)) {
-			$f = ComparatorFunction::number();
-			$cmp = $f($valA, $valB);
-			return $cmp;
-		} else if ($issetA && is_string($valA) && $issetB && is_string($valB)) {
-			$f = ComparatorFunction::string();
-			$cmp = $f($a, $b);
-			return $cmp;
+		if ($issetA && $issetB) {
+			$valA = $this->_get($a, $field);
+			$valB = $this->_get($b, $field);
+			if (is_numeric($valA) && is_numeric($valB)) {
+				$f = ComparatorFunction::number();
+				$cmp = $f($valA, $valB);
+				return $cmp;
+			} else if (is_string($valA) && is_string($valB)) {
+				$f = ComparatorFunction::string();
+				$cmp = $f($valA, $valB);
+				return $cmp;
+			} else {
+				throw new InvalidComparatorArgumentException('comparator type not supported', 5);
+			}
 		} else {
-			die('error4');
+			throw new InvalidComparatorArgumentException('field not set', 4);
 		}
 	}
 

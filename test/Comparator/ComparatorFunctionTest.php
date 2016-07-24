@@ -33,6 +33,6 @@ class ComparatorFunctionTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(0, $f("aaab", "aaab"));
 	}
 
-	//todo number delta tests -> delta should be 0 if used to order
+	//todo delta tests -> delta should be 0 if used to order
 
 }

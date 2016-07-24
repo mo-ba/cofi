@@ -9,6 +9,7 @@ final class ComparatorFunction
 
 	/**
 	 * ComparatorFunction constructor.
+	 * @codeCoverageIgnore
 	 */
 	final private function __construct()
 	{

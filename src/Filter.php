@@ -1,7 +1,7 @@
 <?php namespace Cofi;
 
 use Cofi\Comparator\Interfaces\ComparatorInterface;
-use Cofi\Filter\Abstracts\FilterFunction;
+use Cofi\Filter\FilterFunction;
 use Cofi\Filter\AndFilter;
 use Cofi\Filter\OrFilter;
 use Cofi\Filter\SimpleFilter;
@@ -11,6 +11,7 @@ final class Filter
 
 	/**
 	 * Filter constructor.
+	 * @codeCoverageIgnore
 	 */
 	private function __construct()
 	{
@@ -116,12 +117,29 @@ final class Filter
 
 	/**
 	 * @param $expect
+	 * @return SimpleFilter
+	 */
+	public static function isSame($expect)
+	{
+		return new SimpleFilter(FilterFunction::isSame($expect));
+	}
+	/**
+	 * @param $expect
 	 * @param null|ComparatorInterface|callable|\Closure $comparator
 	 * @return SimpleFilter
 	 */
 	public static function isEqual($expect, $comparator = null)
 	{
 		return new SimpleFilter(FilterFunction::isEqual($expect, $comparator));
+	}
+	/**
+	 * @param $expect
+	 * @param null|ComparatorInterface|callable|\Closure $comparator
+	 * @return SimpleFilter
+	 */
+	public static function isNotEqual($expect, $comparator = null)
+	{
+		return new SimpleFilter(FilterFunction::isNotEqual($expect, $comparator));
 	}
 
 	/**
@@ -133,6 +151,15 @@ final class Filter
 	{
 		return new SimpleFilter(FilterFunction::isGreaterThen($expect, $comparator));
 	}
+	/**
+	 * @param $expect
+	 * @param null $comparator
+	 * @return SimpleFilter
+	 */
+	public static function isLessThen($expect, $comparator = null)
+	{
+		return new SimpleFilter(FilterFunction::isLessThen($expect, $comparator));
+	}
 
 	/**
 	 * @param $expect
@@ -143,4 +170,14 @@ final class Filter
 	{
 		return new SimpleFilter(FilterFunction::isGreaterThenOrEquals($expect, $comparator));
 	}
+	/**
+	 * @param $expect
+	 * @param null $comparator
+	 * @return SimpleFilter
+	 */
+	public static function isLessThenOrEquals($expect, $comparator = null)
+	{
+		return new SimpleFilter(FilterFunction::isLessThenOrEquals($expect, $comparator));
+	}
+
 }
