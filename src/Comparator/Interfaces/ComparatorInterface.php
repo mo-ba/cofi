@@ -12,4 +12,9 @@ interface ComparatorInterface
 	 * @return int
 	 */
 	public function compare($a, $b);
+
+	/**
+	 * @return ComparatorInterface
+	 */
+	public function invert();
 }

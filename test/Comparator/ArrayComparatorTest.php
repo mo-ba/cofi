@@ -3,6 +3,7 @@
 use Cofi\Comparator;
 use Cofi\Comparator\ArrayComparator;
 use Cofi\Comparator\ComparatorFunction;
+use Cofi\Comparator\Interfaces\ComparatorInterface;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -429,5 +430,13 @@ class CComparator implements Comparator\Interfaces\ComparatorInterface
 	public function compare($a, $b)
 	{
 		return $a - $b;
+	}
+
+	/**
+	 * @return ComparatorInterface
+	 */
+	public function invert()
+	{
+		return $this;
 	}
 }
