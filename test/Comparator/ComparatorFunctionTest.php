@@ -33,6 +33,21 @@ class ComparatorFunctionTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(0, $f("aaab", "aaab"));
 	}
 
-	//todo delta tests -> delta should be 0 if used to order
+	public function testStringLength()
+	{
+		$f = ComparatorFunction::stringLength();
+
+		$this->assertEquals(1, $f("234", "55"));
+		$this->assertEquals(2, $f("aaab65z56", "aaasdas"));
+		$this->assertEquals(1, $f("gdfghdf", "fgdhfr"));
+		$this->assertEquals(-2, $f("gdfghdf", "gdfghdfsd"));
+		$this->assertEquals(2, $f("aaab65z56", "aaasdas"));
+		$this->assertEquals(0, $f("nvcb5", "bnvc4"));
+		$this->assertEquals(-2, $f(545, "bnvc4"));
+		$this->assertEquals(-3, $f(54, "bnvc4"));
+		$this->assertEquals(-5, $f(false, "bnvc4"));
+		$this->assertEquals(-4, $f(true, "bnvc4"));
+	}
+
 
 }

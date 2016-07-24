@@ -61,6 +61,14 @@ class SimpleComparatorTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(1, $f("aaab65z56", "aaaaasdas"));
 		$this->assertEquals(0, $f("aaab", "aaab"));
 	}
+	public function testInitStringLength()
+	{
+		$f = Comparator::stringLength();
+
+		$this->assertEquals(3, $f("aaabdds", "aaac"));
+		$this->assertEquals(-1, $f("aaab65z56", "aaaaasdas2"));
+		$this->assertEquals(0, $f("aaab", "aaab"));
+	}
 
 	public function testString()
 	{

@@ -47,4 +47,12 @@ final class Comparator
 
 		return new SimpleComparator(ComparatorFunction::string());
 	}
+	/**
+	 * @return SimpleComparator
+	 */
+	public static function stringLength()
+	{
+
+		return new SimpleComparator(ComparatorFunction::stringLength());
+	}
 }

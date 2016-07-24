@@ -37,5 +37,11 @@ final class ComparatorFunction
 			return $dif == 0 ? 0 : ($dif < 0 ? -1 : 1);
 		};
 	}
+	public static function stringLength()
+	{
+		return function ($a, $b) {
+			return strlen($a) - strlen($b);
+		};
+	}
 
 }
