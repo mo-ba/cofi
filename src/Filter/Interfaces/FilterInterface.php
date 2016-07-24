@@ -10,4 +10,9 @@ interface FilterInterface
 	 * @return bool
 	 */
 	public function apply($value);
+
+	/**
+	 * @return FilterInterface
+	 */
+	public function not();
 }
