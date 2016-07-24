@@ -437,6 +437,6 @@ class CComparator implements Comparator\Interfaces\ComparatorInterface
 	 */
 	public function invert()
 	{
-		return $this;
+		return new Comparator\InvertedComparator($this);
 	}
 }
