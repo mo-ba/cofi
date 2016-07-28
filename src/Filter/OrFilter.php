@@ -1,6 +1,6 @@
 <?php namespace Cofi\Filter;
 
-use Cofi\Filter\Abstracts\Filter as AbstractFilter;
+use Cofi\Filter\Abstracts\AbstractFilter;
 
 /**
  * Class OrFilter

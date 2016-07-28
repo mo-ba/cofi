@@ -1,11 +1,13 @@
-<?php
-
-namespace CofiTest\Filter;
-
+<?php namespace CofiTest\Filter;
 
 use Cofi\Filter;
+use PHPUnit_Framework_TestCase;
 
-class FilterCompoundTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class FilterCompoundTest
+ * @package CofiTest\Filter
+ */
+class FilterCompoundTest extends PHPUnit_Framework_TestCase
 {
 
 

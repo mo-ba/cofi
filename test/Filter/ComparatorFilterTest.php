@@ -1,18 +1,11 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mb
- * Date: 21.07.16
- * Time: 14:30
- */
-
-namespace CofiTest\Filter;
+<?php namespace CofiTest\Filter;
 
 
 use Cofi\Comparator;
 use Cofi\Filter;
+use PHPUnit_Framework_TestCase;
 
-class ComparatorFilterTest extends \PHPUnit_Framework_TestCase
+class ComparatorFilterTest extends PHPUnit_Framework_TestCase
 {
 
 

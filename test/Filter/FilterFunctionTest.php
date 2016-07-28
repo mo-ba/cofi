@@ -1,11 +1,13 @@
-<?php
-
-namespace CofiTest\Filter;
-
+<?php namespace CofiTest\Filter;
 
 use Cofi\Filter\FilterFunction;
+use PHPUnit_Framework_TestCase;
 
-class FilterFunctionTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class FilterFunctionTest
+ * @package CofiTest\Filter
+ */
+class FilterFunctionTest extends PHPUnit_Framework_TestCase
 {
 
 	public function testIsNum()

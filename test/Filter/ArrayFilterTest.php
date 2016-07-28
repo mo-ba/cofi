@@ -1,18 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mb
- * Date: 20.07.16
- * Time: 22:52
- */
-
-namespace CofiTest\Filter;
-
+<?php namespace CofiTest\Filter;
 
 use Cofi\Filter;
 use Cofi\Filter\FilterFunction;
+use PHPUnit_Framework_TestCase;
 
-class ArrayFilterTest extends \PHPUnit_Framework_TestCase
+class ArrayFilterTest extends PHPUnit_Framework_TestCase
 {
 	public function testFilter()
 	{
